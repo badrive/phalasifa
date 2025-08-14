@@ -6,11 +6,39 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 11:09:46 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/12 15:18:35 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/14 20:16:40 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	ft_destroy(t_rules *arg)
+{
+	int	i;
+
+	if (!arg)
+		return ;
+	if (arg->forks)
+	{
+		i = 0;
+		while (i < arg->nb_philo)
+		{
+			pthread_mutex_destroy(&arg->forks[i]);
+			i++;
+		}
+		free(arg->forks);
+		arg->forks = NULL;
+	}
+	pthread_mutex_destroy(&arg->write_lock);
+	pthread_mutex_destroy(&arg->meal_lock);
+	pthread_mutex_destroy(&arg->stop_lock);
+	if (arg->philo)
+	{
+		free(arg->philo);
+		arg->philo = NULL;
+	}
+	free(arg);
+}
 
 int	main(int ac, char **av)
 {
@@ -21,13 +49,15 @@ int	main(int ac, char **av)
 	init_all(arg);
 	if (arg->nb_philo == 1)
 	{
-		one_philo(arg);
 		one_philo_t(arg->philo);
+		ft_destroy(arg);
+		exit(1);
 	}
 	else
 	{
 		create_thread(arg);
 		monitor(arg->philo);
 		joun(arg);
+		ft_destroy(arg);
 	}
 }

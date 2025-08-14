@@ -62,7 +62,8 @@ int	philo_must_eat(t_philo *philo, int i)
 			philo[i].loop = 0;
 			pthread_mutex_unlock(&philo->arg->stop_lock);
 			philo->arg->finished_count++;
-			if (philo->arg->finished_count >= philo->arg->nb_philo && philo[i].id % 2 != 0)
+			if (philo->arg->finished_count >= philo->arg->nb_philo
+				&& philo[i].id % 2 != 0)
 				return (1);
 			pthread_mutex_unlock(&philo->arg->write_lock);
 		}
