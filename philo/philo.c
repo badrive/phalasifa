@@ -6,13 +6,13 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 09:46:32 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/13 11:26:26 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/16 20:54:52 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	joun(t_rules *arg)
+void	ft_join(t_rules *arg)
 {
 	int	i;
 
@@ -44,7 +44,6 @@ int	philo_is_died(t_philo *philo, int i)
 		}
 		print_isdied(&philo[i], "is died");
 		pthread_mutex_unlock(&philo->arg->stop_lock);
-		pthread_mutex_lock(&philo->arg->write_lock);
 		return (1);
 	}
 	return (0);
@@ -64,7 +63,11 @@ int	philo_must_eat(t_philo *philo, int i)
 			philo->arg->finished_count++;
 			if (philo->arg->finished_count >= philo->arg->nb_philo
 				&& philo[i].id % 2 != 0)
+			{
+				pthread_mutex_unlock(&philo->arg->write_lock);
+				pthread_mutex_unlock(&philo->arg->meal_lock);
 				return (1);
+			}
 			pthread_mutex_unlock(&philo->arg->write_lock);
 		}
 		pthread_mutex_unlock(&philo->arg->meal_lock);

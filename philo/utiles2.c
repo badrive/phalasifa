@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 09:39:05 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/13 11:26:43 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/16 20:55:57 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	write_err(t_rules *philo)
 	exit(1);
 }
 
-int	check_loob(t_philo *philo)
+int	check_loop(t_philo *philo)
 {
 	int	j;
 
@@ -39,7 +39,7 @@ long	get_time_ms(void)
 
 void	print_message(t_philo *philo, char *str)
 {
-	if (check_loob(philo))
+	if (check_loop(philo))
 	{
 		pthread_mutex_lock(&philo->arg->write_lock);
 		ft_putnbr_fd(get_time_ms() - philo->start_time, 1);

@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 09:34:09 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/14 20:55:30 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/16 20:55:46 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,9 @@ void	thinking(t_philo *philo)
 void	ft_usleep(int time, t_philo *philo)
 {
 	long	time_star;
-	int		time_courr;
 
 	time_star = get_time_ms();
-	time_courr = get_time_ms() - time_star;
-	while (time_courr < time)
+	while (get_time_ms() - time_star < time)
 	{
 		pthread_mutex_lock(&philo->arg->stop_lock);
 		if (philo->loop == 0)
@@ -72,6 +70,5 @@ void	ft_usleep(int time, t_philo *philo)
 		}
 		pthread_mutex_unlock(&philo->arg->stop_lock);
 		usleep(100);
-		time_courr = get_time_ms() - time_star;
 	}
 }

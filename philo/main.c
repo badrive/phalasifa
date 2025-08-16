@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 11:09:46 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/14 20:16:40 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/16 20:55:22 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int ac, char **av)
 	{
 		create_thread(arg);
 		monitor(arg->philo);
-		joun(arg);
+		ft_join(arg);
 		ft_destroy(arg);
 	}
 }

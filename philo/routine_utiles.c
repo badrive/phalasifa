@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 09:36:34 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/14 20:19:24 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/16 20:55:41 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->id % 2 != 0)
 		usleep(300);
-	while (check_loob(philo))
+	while (check_loop(philo))
 	{
 		eating(philo);
 		sleeping(philo);
@@ -36,7 +36,7 @@ void	*routine_one_philo(void *arg)
 	pthread_mutex_lock(&philo->arg->write_lock);
 	printf("0 %d has taken a fork\n", philo->id);
 	pthread_mutex_unlock(&philo->arg->write_lock);
-	ft_usleep(philo->arg->t_die, philo);
+	usleep(philo->arg->t_die);
 	pthread_mutex_lock(&philo->arg->write_lock);
 	printf("%d %d died\n", philo->arg->t_die, philo->id);
 	pthread_mutex_unlock(&philo->arg->write_lock);

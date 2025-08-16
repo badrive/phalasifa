@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 11:10:20 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/13 11:26:08 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/16 20:55:32 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_rules
 
 void				parsing(char **av, int ac, t_rules *arg);
 void				write_err(t_rules *philo);
-int					check_loob(t_philo *philo);
+int					check_loop(t_philo *philo);
 void				print_message(t_philo *philo, char *str);
 void				print_isdied(t_philo *philo, char *str);
 
@@ -73,7 +73,7 @@ void				loop_init(t_rules *arg, t_philo *philo);
 //my_ programme
 
 long				get_time_ms(void);
-void				joun(t_rules *arg);
+void				ft_join(t_rules *arg);
 void				ft_usleep(int time, t_philo *philo);
 void				create_thread(t_rules *arg);
 void				one_philo_t(t_philo *philo);
